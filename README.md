@@ -4,6 +4,10 @@
 
 - app url https://dashboard-for-space-x-by-abhirampai.vercel.app/
 
+# Screenshots
+
+<img src="./src/assets/screenshots/dashboard_design.png" alt="dashboard design"/>
+
 - TODO
 
 - [ ] make filter function
