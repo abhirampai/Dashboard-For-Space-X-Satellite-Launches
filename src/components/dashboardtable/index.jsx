@@ -2,6 +2,7 @@ import { isEmpty } from "ramda";
 import { useMemo } from "react";
 import { useTable } from "react-table";
 import { COLUMNS } from "./constants";
+import Pagination from "./pagination";
 
 const DashboardTable = () => {
   const data = useMemo(() => []);
@@ -68,6 +69,9 @@ const DashboardTable = () => {
           )}
         </tbody>
       </table>
+      <div className="flex justify-end">
+        <Pagination />
+      </div>
     </div>
   );
 };
