@@ -1,17 +1,25 @@
 import { isEmpty } from "ramda";
 import { useMemo } from "react";
 import { useTable } from "react-table";
-import { COLUMNS } from "./constants";
+import { COLUMNS, predict_success_failure_or_upcoming } from "./constants";
 import Pagination from "./pagination";
 
-const DashboardTable = () => {
-  const data = useMemo(() => []);
-  const columns = useMemo(() => COLUMNS);
+const DashboardTable = ({ launchList, loading }) => {
+  console.log(launchList);
+  const data = useMemo(
+    () =>
+      launchList.map((launch) => ({
+        ...launch,
+        launch_success_label: predict_success_failure_or_upcoming(launch),
+      })),
+    [launchList]
+  );
+  const columns = useMemo(() => COLUMNS, []);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
   const renderTableBody = () => {
-    rows.map((row) => {
+    return rows.map((row) => {
       prepareRow(row);
       return (
         <tr {...row.getRowProps()}>
@@ -21,9 +29,9 @@ const DashboardTable = () => {
                 {...cell.getCellProps()}
                 style={{
                   padding: "10px",
-                  border: "solid 1px gray",
-                  background: "papayawhip",
+                  background: "white",
                 }}
+                className="text-center"
               >
                 {cell.render("Cell")}
               </td>
@@ -60,7 +68,11 @@ const DashboardTable = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {!isEmpty(data) ? (
+          {loading ? (
+            <td colSpan="100%" className="text-center">
+              Loading...!
+            </td>
+          ) : !isEmpty(data) ? (
             renderTableBody()
           ) : (
             <td colSpan="100%" className="text-center">
