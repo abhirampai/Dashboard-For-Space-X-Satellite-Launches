@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~antd/dist/antd.css";
 
 body {
   margin: 0;
@@ -17,5 +18,5 @@ code {
 }
 
 .dashboard--table__wrapper {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 150px);
 }

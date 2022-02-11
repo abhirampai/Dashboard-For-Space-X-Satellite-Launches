@@ -1,11 +1,10 @@
 import { isEmpty } from "ramda";
 import { useMemo } from "react";
-import { useTable } from "react-table";
+import { usePagination, useTable } from "react-table";
 import { COLUMNS, predict_success_failure_or_upcoming } from "./constants";
 import Pagination from "./pagination";
 
 const DashboardTable = ({ launchList, loading }) => {
-  console.log(launchList);
   const data = useMemo(
     () =>
       launchList.map((launch) => ({
@@ -15,11 +14,21 @@ const DashboardTable = ({ launchList, loading }) => {
     [launchList]
   );
   const columns = useMemo(() => COLUMNS, []);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page,
+    gotoPage,
+    state: { pageIndex },
+  } = useTable(
+    { columns, data, initialState: { pageIndex: 0, pageSize: 10 } },
+    usePagination
+  );
 
   const renderTableBody = () => {
-    return rows.map((row) => {
+    return page.map((row) => {
       prepareRow(row);
       return (
         <tr {...row.getRowProps()}>
@@ -45,7 +54,7 @@ const DashboardTable = ({ launchList, loading }) => {
     <div className="pb-56 dashboard--table__wrapper">
       <table
         {...getTableProps()}
-        style={{ border: "solid 1px black", width: "100%", height: "100%" }}
+        style={{ border: "solid 1px black", width: "100%" }}
         className="h-full"
       >
         <thead>
@@ -82,7 +91,12 @@ const DashboardTable = ({ launchList, loading }) => {
         </tbody>
       </table>
       <div className="flex justify-end">
-        <Pagination />
+        <Pagination
+          pageIndex={pageIndex}
+          pageCount={10}
+          gotoPage={gotoPage}
+          total={launchList.length}
+        />
       </div>
     </div>
   );
