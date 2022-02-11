@@ -1,9 +1,8 @@
 import { Pagination as AntdPagination } from "antd";
 
 const Pagination = ({ pageCount, gotoPage, pageIndex, total }) => {
-  console.log(pageIndex);
   return (
-    <div className="mt-2">
+    <div className="mt-4">
       <AntdPagination
         onChange={(page) => {
           gotoPage(page - 1);

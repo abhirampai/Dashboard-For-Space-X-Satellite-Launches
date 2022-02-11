@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const list = () => axios.get("https://api.spacexdata.com/v3/launches");
+const list = () => axios.get(process.env.REACT_APP_BASE_URL);
 
 export const launches = {
   list,

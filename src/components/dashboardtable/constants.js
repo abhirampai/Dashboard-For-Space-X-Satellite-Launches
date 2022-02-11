@@ -32,14 +32,16 @@ export const COLUMNS = [
 export const predict_success_failure_or_upcoming = (launch) => {
   if (launch.upcoming) {
     return (
-      <div class="bg-yellow-300 text-gray-600 px-2 py-1 rounded-xl">
+      <div className="bg-yellow-300 text-gray-600 px-2 py-1 rounded-xl">
         Upcoming
       </div>
     );
   }
   return launch.launch_success ? (
-    <div class="bg-green-300 text-gray-600 px-5 py-1 rounded-xl">Success</div>
+    <div className="bg-green-300 text-gray-600 px-5 py-1 rounded-xl">
+      Success
+    </div>
   ) : (
-    <div class="bg-red-300 text-gray-600 px-5 py-1 rounded-xl">Failed</div>
+    <div className="bg-red-300 text-gray-600 px-5 py-1 rounded-xl">Failed</div>
   );
 };

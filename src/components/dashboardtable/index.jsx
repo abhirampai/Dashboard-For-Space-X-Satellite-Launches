@@ -1,6 +1,7 @@
 import { isEmpty } from "ramda";
 import { useMemo } from "react";
 import { usePagination, useTable } from "react-table";
+import { Spin } from "antd";
 import { COLUMNS, predict_success_failure_or_upcoming } from "./constants";
 import Pagination from "./pagination";
 
@@ -10,6 +11,7 @@ const DashboardTable = ({ launchList, loading }) => {
       launchList.map((launch) => ({
         ...launch,
         launch_success_label: predict_success_failure_or_upcoming(launch),
+        launch_date_utc: new Date(launch.launch_date_utc).toDateString(),
       })),
     [launchList]
   );
@@ -78,15 +80,19 @@ const DashboardTable = ({ launchList, loading }) => {
         </thead>
         <tbody {...getTableBodyProps()}>
           {loading ? (
-            <td colSpan="100%" className="text-center">
-              Loading...!
-            </td>
+            <tr>
+              <td colSpan="100%" className="text-center">
+                <Spin tip="Loading..." />
+              </td>
+            </tr>
           ) : !isEmpty(data) ? (
             renderTableBody()
           ) : (
-            <td colSpan="100%" className="text-center">
-              No Launches Found
-            </td>
+            <tr>
+              <td colSpan="100%" className="text-center">
+                No Launches Found
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
