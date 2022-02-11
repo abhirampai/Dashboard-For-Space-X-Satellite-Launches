@@ -1,12 +1,14 @@
 import Filters from "./common/Filters";
 import Header from "./common/Header";
+import DashboardTable from "./dashboardtable";
 
 const Main = () => {
   return (
     <>
       <Header />
-      <div className="w-11/12 px-32 mt-5">
+      <div className="px-32 mt-5 space-y-4">
         <Filters />
+        <DashboardTable />
       </div>
     </>
   );
