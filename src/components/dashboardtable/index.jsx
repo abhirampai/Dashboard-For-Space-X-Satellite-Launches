@@ -1,6 +1,7 @@
 import { isEmpty } from "ramda";
 import { useMemo } from "react";
 import { usePagination, useTable } from "react-table";
+import { Spin } from "antd";
 import { COLUMNS, predict_success_failure_or_upcoming } from "./constants";
 import Pagination from "./pagination";
 
@@ -79,7 +80,7 @@ const DashboardTable = ({ launchList, loading }) => {
         <tbody {...getTableBodyProps()}>
           {loading ? (
             <td colSpan="100%" className="text-center">
-              Loading...!
+              <Spin tip="Loading..." />
             </td>
           ) : !isEmpty(data) ? (
             renderTableBody()
