@@ -1,12 +1,15 @@
 import DatePicker from "./DatePicker";
 import StatusFilter from "./StatusFilter";
 
-const Filters = () => {
+const Filters = ({ statusFilter, setStatusFilter }) => {
   return (
     <>
       <div className="flex justify-between">
         <DatePicker />
-        <StatusFilter />
+        <StatusFilter
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+        />
       </div>
     </>
   );
