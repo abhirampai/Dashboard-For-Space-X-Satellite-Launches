@@ -10,5 +10,5 @@
 
 - TODO
 
-- [ ] make filter functional
+- [x] make filter functional
 - [ ] make datepicker functional
