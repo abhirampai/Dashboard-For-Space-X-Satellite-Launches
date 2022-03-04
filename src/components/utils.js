@@ -1,16 +1,16 @@
-export const filterByStatus = (status, data) => {
+export const filterByStatus = (status, launches) => {
   switch (status) {
     case "All launches":
-      return data;
+      return launches;
     case "Upcoming launches":
-      return data.filter((launch) => launch.upcoming);
+      return launches.filter((launch) => launch.upcoming);
     case "Failed launches":
-      return data.filter(
+      return launches.filter(
         (launch) => !launch.launch_success && !launch.upcoming
       );
     case "Successful launches":
-      return data.filter((launch) => launch.launch_success);
+      return launches.filter((launch) => launch.launch_success);
     default:
-      return data;
+      return launches;
   }
 };
