@@ -3,13 +3,14 @@ import { launches } from "./api/launches";
 import Filters from "./common/Filters";
 import Header from "./common/Header";
 import DashboardTable from "./dashboardtable";
-import { filterByStatus } from "./utils";
+import { filterByStatus, getServerDate } from "./utils";
 
 const Main = () => {
   const [launchList, setLaunchList] = useState([]);
   const [statusFilter, setStatusFilter] = useState("All launches");
   const [filteredLaunchList, setFilteredLaunchList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { offset } = getServerDate();
   const fetchAllLaunches = async () => {
     try {
       const { data } = await launches.list();
@@ -39,6 +40,7 @@ const Main = () => {
         />
         <DashboardTable launchList={filteredLaunchList} loading={loading} />
       </div>
+      {console.log(new Date(Date.now() + offset))}
     </>
   );
 };
